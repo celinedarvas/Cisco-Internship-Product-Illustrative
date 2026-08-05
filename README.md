@@ -2,8 +2,6 @@
 
 Three internal tools I designed and built as an intern on a Skills Strategy team.
 
-Live at: **https://celinedarvas.github.io/portfolio/**
-
 ## What's in here
 
 Each folder is a self-contained static site. No build step, no server, no dependencies. Open any `index.html` directly in a browser and it works.
