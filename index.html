@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celine Darvas · Portfolio</title>
+  <meta name="description" content="Three internal tools I designed and built during my Skills Strategy internship. Portfolio version of shipped work." />
+
+  <style>
+    :root {
+      --brand-midnight-blue: #0D274D;
+      --brand-sky-blue:      #00B0DA;
+      --ink-900: #1A1F2C;
+      --ink-700: #3D4657;
+      --ink-500: #66707E;
+      --ink-300: #A6ADBB;
+      --line:    #E4E7EB;
+      --line-strong: #CED4DA;
+      --bg:      #FAFBFC;
+      --card-bg: #FFFFFF;
+      --pill-bg: #F0F4F8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink-900);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--brand-midnight-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NDA notice - matches the strip on each artifact */
+    .nda-banner {
+      background: #F0F4F8;
+      border-bottom: 1px solid #DEE2E6;
+      color: #495057;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .nda-banner__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 10px 24px;
+    }
+    .nda-banner strong { color: #0D274D; font-weight: 600; }
+
+    /* Site header */
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: #FFFFFF;
+    }
+    .site-header__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--brand-midnight-blue);
+      font-size: 15px;
+    }
+    .brand .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: var(--brand-sky-blue);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 56px 24px 32px;
+    }
+    .hero h1 {
+      font-size: 34px;
+      line-height: 1.2;
+      margin: 0 0 20px;
+      color: var(--brand-midnight-blue);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .hero__intro {
+      max-width: 700px;
+      font-size: 16px;
+      color: var(--ink-700);
+      margin: 0 0 12px;
+    }
+    .hero__meta {
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-top: 24px;
+    }
+    .hero__meta a { color: var(--ink-700); border-bottom: 1px solid var(--line-strong); }
+
+    /* Project grid */
+    .projects {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 24px 72px;
+    }
+    .projects__label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-500);
+      margin-bottom: 16px;
+    }
+    .project-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 780px) {
+      .project-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+      color: inherit;
+      text-decoration: none;
+    }
+    .project-card:hover {
+      border-color: var(--brand-midnight-blue);
+      box-shadow: 0 4px 16px rgba(13, 39, 77, 0.08);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .project-card:focus-visible {
+      outline: 2px solid var(--brand-sky-blue);
+      outline-offset: 2px;
+    }
+    .project-card__num {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-500);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .project-card__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand-midnight-blue);
+      margin: 0 0 12px;
+      line-height: 1.3;
+    }
+    .project-card__body {
+      font-size: 14px;
+      color: var(--ink-700);
+      margin: 0 0 16px;
+      flex: 1;
+    }
+    .project-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .project-card__meta span {
+      background: var(--pill-bg);
+      color: var(--ink-700);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .project-card__cta {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-midnight-blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .project-card:hover .project-card__cta { color: var(--brand-sky-blue); }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: #FFFFFF;
+      color: var(--ink-500);
+      font-size: 12px;
+    }
+    .site-footer__inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 24px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="nda-banner" role="note" aria-label="Portfolio disclosure">
+  <div class="nda-banner__inner">
+    <strong>Portfolio version.</strong> Every number, name, and organisation label in this build has been changed to comply with NDA. Structure, design system, and analytical model mirror the shipped deliverables.
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <span class="brand"><span class="dot" aria-hidden="true"></span>Celine Darvas · Portfolio</span>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Three internal tools I designed and built as an intern on a Skills Strategy team.</h1>
+    <p class="hero__intro">
+      Two are strategy websites that name the five capabilities each function is investing in for the next 2 to 3 years and the signature skills that define them. The third is a gap analysis tool that pulls those signature skills, matches them against ~10,700 people across 43 roles, and returns a ranked list of where the biggest gaps sit on the biggest audience.
+    </p>
+    <p class="hero__intro">
+      Each site was designed for a real leadership stakeholder. Each one was shipped. All three run as static HTML, CSS, and JavaScript with no framework.
+    </p>
+    <p class="hero__meta">
+      Built by Celine Darvas &middot; Aug 2026 &middot; Portfolio version of production work.
+    </p>
+  </section>
+
+  <section class="projects">
+    <div class="projects__label">Three projects</div>
+    <div class="project-grid">
+
+      <a class="project-card" href="./cs-strategic-capabilities/">
+        <div class="project-card__num">01 &middot; Strategy site</div>
+        <h2 class="project-card__title">Customer Success Strategic Capabilities</h2>
+        <p class="project-card__body">
+          Names the 5 capabilities the function is investing in, the 6 signature skills that define each one, and the sub-orgs, role families, and demand data behind every pick. Built as a stakeholder-facing reference site for leaders to point at when they need to explain the strategy in one link.
+        </p>
+        <div class="project-card__meta">
+          <span>Design</span>
+          <span>Build</span>
+          <span>Content</span>
+          <span>HTML / CSS / JS</span>
+        </div>
+        <span class="project-card__cta">Open the site &nbsp;&rsaquo;</span>
+      </a>
+
+      <a class="project-card" href="./3p-strategic-capabilities/">
+        <div class="project-card__num">02 &middot; Strategy site</div>
+        <h2 class="project-card__title">Second Function Strategic Capabilities</h2>
+        <p class="project-card__body">
+          Same design system applied to a second function with different pillars, different sub-orgs, and different priorities. The content, the information architecture, and the role and skill data are all new. Same visual language, same interaction pattern, so leaders can move between the two without relearning the layout.
+        </p>
+        <div class="project-card__meta">
+          <span>Design system reuse</span>
+          <span>Content</span>
+          <span>HTML / CSS / JS</span>
+        </div>
+        <span class="project-card__cta">Open the site &nbsp;&rsaquo;</span>
+      </a>
+
+      <a class="project-card" href="./capability-readiness-tool/">
+        <div class="project-card__num">03 &middot; Data tool</div>
+        <h2 class="project-card__title">Capability Readiness Tool</h2>
+        <p class="project-card__body">
+          The tool that ties the other two sites together. Pulls the 30 signature skills from both strategy sites, matches them against ~10,700 people across 43 roles, and returns a ranked list of which capabilities have the biggest gap on the biggest audience in your current filter. Includes a chat interface that answers structured questions about the same data (12 answer templates, deterministic renders, no hallucinated numbers).
+        </p>
+        <div class="project-card__meta">
+          <span>Product design</span>
+          <span>Data model</span>
+          <span>Chat UX</span>
+          <span>HTML / CSS / JS</span>
+        </div>
+        <span class="project-card__cta">Open the tool &nbsp;&rsaquo;</span>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    Portfolio version of internal work. Numbers, names, and organisation labels have been changed to comply with NDA. Structure and design mirror the shipped deliverables.
+  </div>
+</footer>
+
+</body>
+</html>
